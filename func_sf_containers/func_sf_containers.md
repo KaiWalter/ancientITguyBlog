@@ -17,11 +17,11 @@ One major element of the integration story is the processing logic. This is impl
 Now. How to get these functions also inside the boundaries of the virtual network ...
 
 - with seamless access to connected back-end resources
-- without any public exposure
+- without any public exposure 
 
-VNET peering was not sufficient enough for me to fulfull these requirements.
+App Service capability of VNET peering was not sufficient enough for me to fulfull these requirements.
 
-App Service Environment (aka ASE) - back in summer 2017 instance deployment times here in West Europe of ~4-6h and also the cost were just not bearable. May be meanwhile it has improved with v2 - I did not check.
+App Service Environment (aka ASE): back in summer 2017 instance deployment times here in West Europe of ~4-6h and also the cost were just not bearable. May be meanwhile it has improved with v2 - I did not check.
 
 We already had Service Fabric running inside the virtual network -  covering the few stateful services of the platform. Why not just squeeze Azure Functions somehow into Service Fabric?
 
