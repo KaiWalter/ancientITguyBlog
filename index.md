@@ -10,7 +10,7 @@ On my day job I am a Solution Architect in an Enterprise IT environment. That jo
 
 ### Q: Can this guy not afford a decent blogging platform?
 
-**A:** Actually I could. But I guess I'm a kind of _thrifty_ person. I'm just probing here and start with this GutHib pages for the time being. If it makes sense at a later stage, I may go for a regular blogging environment.
+**A:** Actually I could. But I guess I'm a kind of _thrifty_ person. I'm just probing here and start with this GitHub Pages for the time being. If it makes sense at a later stage, I may go for a regular blogging environment.
 
 ### Q: Where does this ancient in your Twitter handle come from?
 
@@ -21,3 +21,9 @@ What I'm prood of: I still can apply knowledge and skills I acquired the hard wa
 ## Disclaimer
 
 I am not a native english speaker and by far not a writer. Please forgive any errors and may be the lack of elegance or sophistication in way I write.
+
+## Follow me
+
+- [Twitter](https://twitter.com/ancientitguy)
+- [GitHub](https://github.com/kaiwalter)
+- [LinkedIn](https://www.linkedin.com/in/kaiwalter/)
