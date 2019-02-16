@@ -8,4 +8,4 @@ On my day job I am a Solution Architect in an Enterprise IT environment. That jo
 
 ## Disclaimer
 
-I am not a native english speaker and writer. Please forgive any errors and brevity.
+I am not a native english speaker and by far not a writer. Please forgive any errors and may be the lack of elegance or sophistication in way I write.
