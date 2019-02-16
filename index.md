@@ -20,7 +20,7 @@ What I'm prood of: I still can apply knowledge and skills I acquired the hard wa
 
 ## Disclaimer
 
-I am not a native english speaker and by far not a writer. Please forgive any errors and may be the lack of elegance or sophistication in way I write.
+I am not a native english speaker and by far not a writer. Please forgive any errors and maybe the lack of elegance or sophistication in way I write.
 
 ## Follow me
 
