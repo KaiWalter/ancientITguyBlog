@@ -4,7 +4,7 @@
 
 > STARTED: June 2018 | STATUS: work in progress
 
-In [Azure Functions inside Containers hosted in Service Fabric - Part 1 (WebHost v1)](./func_sf_containers/func_sf_containers_part1.md) the why and how to get the now outdated Azure Functions v1 WebHost working inside containers into Service Fabric is explained.
+In [Azure Functions inside Containers hosted in Service Fabric - Part 1 (WebHost v1)](./func_sf_containers_part1.md) the why and how to get the now outdated Azure Functions v1 WebHost working inside containers into Service Fabric is explained.
 
 For v2 everything got far more simple. There are already [images on Docker Hub](https://hub.docker.com/_/microsoft-azure-functions-base) and [base image samples on GitHub](https://github.com/Azure/azure-functions-docker/blob/master/host/2.0/nanoserver-1803/Dockerfile) for Windows and Linux which provide what I had to figure out in v1 on my own.
 
