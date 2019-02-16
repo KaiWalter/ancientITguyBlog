@@ -4,7 +4,8 @@ On my day job I am a Solution Architect in an Enterprise IT environment. That jo
 
 ## Content
 
-- [Azure Functions inside Containers hosted in Service Fabric](./func_sf_containers/func_sf_containers.md)
+- [Azure Functions inside Containers hosted in Service Fabric - Part 1 (WebHost v1)](./func_sf_containers/func_sf_containers_part1.md)
+- [Azure Functions inside Containers hosted in Service Fabric - Part 2 (WebHost v2)](./func_sf_containers/func_sf_containers_part2.md)
 
 ## FAQ
 
