@@ -129,8 +129,8 @@ dotnet.exe C:\runtime\Microsoft.Azure.WebJobs.Script.WebHost.dll
 
 ----
 
-## adding features
+## adding features to v2
 
-### using API Management as container / service locator
+[using API Management as container / service locator](./apim_sf_servicelocator.md)
 
 to be continued ...
