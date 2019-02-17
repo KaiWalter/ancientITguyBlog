@@ -1,5 +1,7 @@
 # Motivation (spring 2019)
 
+<img style="float: right; margin-left:20px;" src="https://media.licdn.com/dms/image/C4D03AQHRVWgkQ5zSWQ/profile-displayphoto-shrink_200_200/0?e=1556150400&v=beta&t=qo4lvxQyUdnB1_ue9oUbWCt4S7KfW97gHAJUsysC9Jw">
+
 On my day job I am a Solution Architect in an Enterprise IT environment. That job keeps me away from the console most of the time. But from time to time I need to give in to my urge to actually figure out something technical. And here we are.
 
 ## Content
