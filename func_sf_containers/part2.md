@@ -6,12 +6,12 @@
 
 In [Azure Functions inside Containers hosted in Service Fabric - Part 1 (WebHost v1)](./part1.md) the why and how to get the now outdated Azure Functions v1 WebHost working inside containers into Service Fabric is explained.
 
-For v2 everything got far more simple. There are already [images on Docker Hub](https://hub.docker.com/_/microsoft-azure-functions-base) and [base image samples on GitHub](https://github.com/Azure/azure-functions-docker/blob/master/host/2.0/nanoserver-1803/Dockerfile) for Windows and Linux which provide what I had to figure out in v1 on my own.
+For v2 there was more support for containerizing Azure Functions. There are already [images on Docker Hub](https://hub.docker.com/_/microsoft-azure-functions-base) and [base image samples on GitHub](https://github.com/Azure/azure-functions-docker/blob/master/host/2.0/nanoserver-1803/Dockerfile) for Windows and Linux which provide what I had to figure out in v1 on my own.
 
 But:
 
-- no PowerShell in the Nanoserver ```microsoft/dotnet:2.1-aspnetcore-runtime-nanoserver-1803``` base image
-- How can I load my corporate certificates into the image?
+- no PowerShell in the Nanoserver ```microsoft/dotnet:2.1-aspnetcore-runtime-nanoserver-1803``` base image - which I needed for a the tweaks I implemented in v1
+- PowerShell Core did not have the Certificate cmdlets yet. So how can I load my corporate certificates into the image?
 
 ## solving the basic problems
 
@@ -61,17 +61,15 @@ USER ContainerUser
 ...
 ```
 
-Significant changes from Windows Server Core 1803 and Nanoserver 1803 base images require also to switch user context for importing certificates.
+Significant changes from Windows Server Core 1803 and Nanoserver 1803 base images required also to switch user context for importing certificates.
 
 ### handling secrets
 
 As the ```Dockerfile``` sample above suggests, also directory ACL needed modification so that the host running in user context is able to write into the secrets folder.
 
-## adding more functionality
+## MSI
 
-### MSI = managed service identity
-
-Also the MSI part needed some tweaking after switching to Nanoserver and PowerShell Core:
+Also the MSI part needed some tweaking after switching to Nanoserver and PowerShell Core. Until ```Get-NetRoute``` cmdlet is not available in PowerShell Core, this strange string pipelining exercise is required to extract the default gateway.
 
 ```PowerShell
 Write-Host "adding route for Managed Service Identity"
@@ -89,21 +87,16 @@ Write-Host "MSI StatusCode :" $response.StatusCode
 dotnet.exe C:\runtime\Microsoft.Azure.WebJobs.Script.WebHost.dll
 ```
 
-As long as ```Get-NetRoute``` cmdlet is not available in PowerShell Core, this strange string pipelining exercise is required.
+## adding more functionality
 
 ### @Microsoft.KeyVault(SecretUri=...) application settings
 
-[Azure Functions in App Service supports the ```@Microsoft.KeyVault()``` syntax in application settings.](https://azure.microsoft.com/sv-se/blog/simplifying-security-for-serverless-and-web-apps-with-azure-functions-and-app-service/)  To achieve the same with environment variables inside the container this script extensions does the transformation:
+[Azure Functions in App Service support the ```@Microsoft.KeyVault()``` syntax in application settings.](https://azure.microsoft.com/sv-se/blog/simplifying-security-for-serverless-and-web-apps-with-azure-functions-and-app-service/)  To achieve the same with environment variables inside containers this script extension does the transformation:
 
 ```PowerShell
 ...
 # --------------------------------------------------------------------------------
-# test MSI access
-$response = Invoke-WebRequest -Uri 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net%2F' -Method GET -Headers @{Metadata = "true"} -UseBasicParsing
-Write-Host "MSI StatusCode :" $response.StatusCode
-
-# --------------------------------------------------------------------------------
-# replace Environment Variables with KeyVault-URIs with actual values
+# replace Environment Variables holding KeyVault URIs with actual values
 $msiEndpoint = 'http://169.254.169.254/metadata/identity/oauth2/token'
 $vaultTokenURI = 'https://vault.azure.net&api-version=2018-02-01'
 $authenticationResult = Invoke-RestMethod -Method Get -Headers @{Metadata = "true"} -Uri ($msiEndpoint + '?resource=' + $vaultTokenURI)
