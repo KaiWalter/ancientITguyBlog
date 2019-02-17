@@ -279,6 +279,6 @@ OK, problem solved.
 But:
 
 - Windows Server Core images have ~6GB size - hence Service Fabric nodes need an awful amount of time to load new versions of these
-- time goes on, MSI is around the corner
+- time goes on
 
-With Azure Functions v2 and .NET Core it is possible to have images reduced in size and host those on Linux: [Azure Functions inside Containers hosted in Service Fabric - Part 2 (WebHost v2)](./part2.md)
+With Azure Functions v2 and .NET Core it is possible to have images dramatically reduced in size and host those on Linux: [Azure Functions inside Containers hosted in Service Fabric - Part 2 (WebHost v2)](./part2.md)

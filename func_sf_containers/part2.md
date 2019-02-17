@@ -67,7 +67,7 @@ Significant changes from Windows Server Core 1803 and Nanoserver 1803 base image
 
 As the ```Dockerfile``` sample above suggests, also directory ACL needed modification so that the host running in user context is able to write into the secrets folder.
 
-## MSI
+### MSI
 
 Also the MSI part needed some tweaking after switching to Nanoserver and PowerShell Core. Until ```Get-NetRoute``` cmdlet is not available in PowerShell Core, this strange string pipelining exercise is required to extract the default gateway.
 
@@ -127,4 +127,10 @@ if ($authenticationResult) {
 dotnet.exe C:\runtime\Microsoft.Azure.WebJobs.Script.WebHost.dll
 ```
 
-## to be continued ...
+----
+
+## adding features
+
+### using API Management as container / service locator
+
+to be continued ...
