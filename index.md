@@ -5,10 +5,12 @@
 On my day job I am a Solution Architect in an Enterprise IT environment. That job keeps me away from the console most of the time. Occasionally I need to give in to my urge to actually figure out something technical. And here we are.
 
 ----
+
 ## Content
 
 - [Azure Functions inside Containers hosted in Service Fabric - Part 1 (WebHost v1)](./func_sf_containers/part1.md)
 - [Azure Functions inside Containers hosted in Service Fabric - Part 2 (WebHost v2)](./func_sf_containers/part2.md)
+- [using API Management as Service Fabric container / service locator](./func_sf_containers/apim_sf_servicelocator.md)
 
 ## Disclaimer
 
