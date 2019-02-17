@@ -42,9 +42,9 @@ version: '3.0'
 
 Service Fabric will assign a port itself for each container started on a node. Only the Service Fabric management endpoint then knows the port assignment.
 
-To establish a connection between API Management and the Service Fabric management endpoint, Azure PowerShell cmdlet[New-AzureRmApiManagementBackendServiceFabric](https://docs.microsoft.com/en-us/powershell/module/azurerm.apimanagement/new-azurermapimanagementbackendservicefabric) can be used.
+To establish a connection between API Management and the Service Fabric management endpoint, Azure PowerShell cmdlet [New-AzureRmApiManagementBackendServiceFabric](https://docs.microsoft.com/en-us/powershell/module/azurerm.apimanagement/new-azurermapimanagementbackendservicefabric) can be used.
 
- API Management policies needs to be adjusted: [set-backend-service](https://docs.microsoft.com/en-us/azure/api-management/api-management-transformation-policies#SetBackendService) is added to resolve from the containers Service Fabric service name to a URI on a node:
+ API Management policies need to be adjusted: [set-backend-service](https://docs.microsoft.com/en-us/azure/api-management/api-management-transformation-policies#SetBackendService) is added to resolve from the containers Service Fabric service name to an URI on a node:
 
 ```xml
 ...
