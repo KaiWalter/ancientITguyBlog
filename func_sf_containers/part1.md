@@ -57,7 +57,7 @@ RUN Expand-Archive C:\WebHost.zip ; Remove-Item WebHost.zip`
 ...
 ```
 
-At some point the team stopped providing these precanned versions. This required to adjust our CI/CD process for the Functions host base image into [downloading the source code](./DownloadSource.PS1), building it e.g. in Azure DevOps aka VSTS to be loaded into the base image:
+At some point the team stopped providing these precanned versions. This required to adjust our CI/CD process for the Functions host base image into [downloading the source code](https://gist.github.com/KaiWalter/e69cfd1d19f56b107acae102484e77d1), building it e.g. in Azure DevOps aka VSTS to be loaded into the base image:
 
 ```
 ...

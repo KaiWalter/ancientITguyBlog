@@ -59,7 +59,7 @@ To establish a connection between API Management and the Service Fabric manageme
 
 Using ```New-AzureRmApiManagementBackendServiceFabric``` seemed pretty straight forward. However in reality, when breaking up the connection or replacing the certificate, these 2 objects reference each other in API Management and one cannot be without the other.
 
-To exchange connection and certificate while in operation, I chose to always create a new certificate (suffixed with a timestamp) and a new backend entity (as well suffixed), wire them up, put the new backend id into an API Management Named Value to be used by policies and then afterwards removing the obsolete certificates and backend objects: [configureApiManagement2Cluster.ps1](./configureApiManagement2Cluster.PS1)
+To exchange connection and certificate while in operation, I chose to always create a new certificate (suffixed with a timestamp) and a new backend entity (as well suffixed), wire them up, put the new backend id into an API Management Named Value to be used by policies and then afterwards removing the obsolete certificates and backend objects: [configureApiManagement2Cluster.ps1](https://gist.github.com/KaiWalter/f931a530b9aba8d0c070bfe943010096)
 
 > to adapt it to other use cases, the init section of this script can be simplified, the ```$Instance``` can be removed which just reflects the various instances of APIM to SF combinations we have: DEV,...,PROD
 
