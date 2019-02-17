@@ -10,10 +10,18 @@ For v2 there was more support for containerizing Azure Functions. There are alre
 
 But:
 
+- Nanoserver smalldisk images cannot are ... too small
 - no PowerShell in the Nanoserver ```microsoft/dotnet:2.1-aspnetcore-runtime-nanoserver-1803``` base image - which I needed for a the tweaks I implemented in v1
 - PowerShell Core did not have the Certificate cmdlets yet. So how can I load my corporate certificates into the image?
 
 ## solving the basic problems
+
+### increase Nanoserver smalldisk OS disk
+
+The solution to this problem is described on Stack Overflow:
+
+- [How can I extend OS disks for Windows Server smalldisk based VMSS or Service Fabric clusters?](https://stackoverflow.com/questions/51336867/how-can-i-extend-os-disks-for-windows-server-smalldisk-based-vmss-or-service-fab)
+- [How can I attach a data disk to a Windows Server Azure VM and format it directly in the template?](https://stackoverflow.com/questions/51205573/how-can-i-attach-a-data-disk-to-a-windows-server-azure-vm-and-format-it-directly)
 
 ### adding PowerShell Core
 
@@ -66,6 +74,8 @@ Significant changes from Windows Server Core 1803 and Nanoserver 1803 base image
 ### handling secrets
 
 As the ```Dockerfile``` sample above suggests, also directory ACL needed modification so that the host running in user context is able to write into the secrets folder.
+
+[check out Stack Overflow: System.UnauthorizedAccessException : Access to the path 'C:\runtime\Secrets\host.json' is denied in Azure Functions Windows container](https://stackoverflow.com/questions/53683035/system-unauthorizedaccessexception-access-to-the-path-c-runtime-secrets-host)
 
 ### MSI
 
@@ -129,10 +139,6 @@ if ($authenticationResult) {
 dotnet.exe C:\runtime\Microsoft.Azure.WebJobs.Script.WebHost.dll
 ```
 
-----
+## related
 
-## using API Management as Service Fabric container locator
-
-[see here...](./apim_sf_servicelocator.md)
-
-
+- [using API Management as Service Fabric container locator](./apim_sf_servicelocator.md)
