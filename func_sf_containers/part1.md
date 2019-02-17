@@ -21,13 +21,13 @@ Now. How to get these functions also inside the boundaries of the virtual networ
 
 **App Service** capability of **VNET** peering was not sufficient enough for me to fulfill these requirements back then.
 
-App Service Environment (aka **ASE**): back in spring/summer 2017 instance deployment times here in West Europe were in the range ~4-6h and the monthly cost were beyond reasonable justification - [my approach is described here](https://github.com/KaiWalter/ARM-FunctionApp-in-ILBASE-SelfSignedCert). Additionally ASE spinned up a some VMs / resources which would not be properly untilized in a Functions only scenario. Maybe meanwhile it has improved with v2 - I did not check.
+App Service Environment (aka **ASE**): back in spring/summer 2017 instance deployment times here in West Europe were in the range between 4 and 6h & the monthly cost were beyond reasonable justification - [my approach is described here](https://github.com/KaiWalter/ARM-FunctionApp-in-ILBASE-SelfSignedCert). Additionally ASE spinned up a some VMs / resources which would not be properly untilized in a Functions only scenario. Maybe meanwhile it has improved with v2 - I did not check.
 
 But we already had **Service Fabric** running inside the virtual network -  hosting stateful services and the stateless services we could not easily bridge to back-end resources over API Management. So why not just squeeze Azure Functions somehow into Service Fabric?
 
 ## Motivation
 
-Bits and pieces, I figured out along the journey, I already put in several Q&A style articles on Stackoverflow. However I wanted to piece it together into a more comprehensive story to give people out there a chance to follow along and may be adapt a few things for themselves.
+Bits and pieces, I figured out along the journey, I already put in several Q&A style articles on Stack Overflow. However I wanted to piece it together into a more comprehensive story to give people out there a chance to follow along and may be adapt a few things for themselves.
 
 ## WebHost v1 as Service Fabric application
 
