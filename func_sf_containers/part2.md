@@ -87,6 +87,8 @@ Write-Host "MSI StatusCode :" $response.StatusCode
 dotnet.exe C:\runtime\Microsoft.Azure.WebJobs.Script.WebHost.dll
 ```
 
+----
+
 ## adding more functionality
 
 ### @Microsoft.KeyVault(SecretUri=...) application settings
@@ -129,8 +131,8 @@ dotnet.exe C:\runtime\Microsoft.Azure.WebJobs.Script.WebHost.dll
 
 ----
 
-## adding features to v2
+## using API Management as Service Fabric container locator
 
-[using API Management as container / service locator](./apim_sf_servicelocator.md)
+[see here...](./apim_sf_servicelocator.md)
 
-to be continued ...
+
