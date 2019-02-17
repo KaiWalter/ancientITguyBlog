@@ -21,7 +21,7 @@ Now. How to get these functions also inside the boundaries of the virtual networ
 
 **App Service** capability of **VNET** peering was not sufficient enough for me to fulfill these requirements back then.
 
-App Service Environment (aka **ASE**): back in summer 2017 instance deployment times here in West Europe were in the range ~4-6h and the monthly cost were beyond reasonable justification. Additionally ASE spinned up a some VMs / resources which would not be properly untilized in a Functions only scenario. Maybe meanwhile it has improved with v2 - I did not check.
+App Service Environment (aka **ASE**): back in spring/summer 2017 instance deployment times here in West Europe were in the range ~4-6h and the monthly cost were beyond reasonable justification - [my approach is described here](https://github.com/KaiWalter/ARM-FunctionApp-in-ILBASE-SelfSignedCert). Additionally ASE spinned up a some VMs / resources which would not be properly untilized in a Functions only scenario. Maybe meanwhile it has improved with v2 - I did not check.
 
 But we already had **Service Fabric** running inside the virtual network -  hosting stateful services and the stateless services we could not easily bridge to back-end resources over API Management. So why not just squeeze Azure Functions somehow into Service Fabric?
 
