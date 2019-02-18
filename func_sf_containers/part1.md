@@ -43,6 +43,18 @@ Finally with this approach Functions hosted in this pattern could exist as first
 
 ----
 
+## Scalability
+
+Before I go into single elements of the approach, a word on scalability - which seems to be an obvious issue; thanks [Paco](https://twitter.com/pacodelacruz) for pointing it out. 
+
+When we started with our platform we assumed, that it needed to be scalable like hell. Thousands of messages per second coming in from all directions which need to be passed on immediately at the same pace. In the aftermath: not so much. Some producers may generate loads of messages (e.g. on a mass data change in a business system) but most of the consumers - including our database, Cosmos DB - need a balanced way of getting these messages delivered. Hence the platform is acting more like a sandwich - allowing fast unloading from the producers and throttled forwarding applied towards the consumers.
+
+Based on our initial assumption we started fronting our unloading points with API Management which passed on the requests to Azure Functions in Consumption Plan. That setup fulfilled the scalability requirements pretty good - increasing incoming traffic made the Functions scale up, decreasing traffic back down again. What we did not consider - and back then just didn't know - were the limitations of the Function Consumption Plan sandbox environments. The HTTP triggered Functions picked up the incoming traffic and distributed it to several target message queues, database and/or target consumers HTTP endpoints. The high message load combined with too much processing or forwarding steps resulted in massive port exhaustion situations. To circumvent this we decided to let API Management take the initial load which puts message meta data directly into Service Bus queues and message payload into Blob storage. With that let Functions work on this message traffic at a controlled pace.
+
+Hence no further need for Consumption Plan and flexible scaling of the Function App instances anymore. Today we exercise semi-automated scaling of the containers depending on the backlog we have in certain Service Bus queues.
+
+----
+
 ### key elements and gotchas
 
 #### building the Function host
