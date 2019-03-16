@@ -7,11 +7,22 @@ On my day job I am a Solution Architect in an Enterprise IT environment. That jo
 
 ----
 
+<br/>
+
 ## Content
 
-- [Azure Functions inside Containers hosted in Service Fabric - Part 1 (WebHost v1)](./func_sf_containers/part1.md)
-- [Azure Functions inside Containers hosted in Service Fabric - Part 2 (WebHost v2)](./func_sf_containers/part2.md)
+### Azure Functions inside Containers hosted in Service Fabric
+
+- [Part 1 - hosting a v1 WebHost](./func_sf_containers/part1.md)
+- [Part 2 - hosting a v2 WebHost](./func_sf_containers/part2.md)
+- [Part 3 - supporting a singleton](./func_sf_containers/part3.md)
+- [Part 4 - connect to Service Bus Namespace Manager with MSI](./func_sf_containers/part4.md)
+
+### API Management and Service Fabric
+
 - [using API Management as Service Fabric container / service locator](./func_sf_containers/apim_sf_servicelocator.md)
+
+----
 
 ## Disclaimer
 
