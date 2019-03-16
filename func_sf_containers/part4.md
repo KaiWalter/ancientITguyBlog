@@ -6,7 +6,7 @@ As NamespaceManager is not supported anymore with the .NET Core compatible packa
 
 This package supports a MSI based authentication and I can leverage the availability of [MSI - which I described here for v2 WebHosts](./part2.md):
 
-```CS
+```cs
 ...
     // some magic that determines subscriptionId, resourceGroupName & sbNamespaceName
 ...
