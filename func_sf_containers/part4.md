@@ -2,7 +2,7 @@
 
 ## ServiceBus NamespaceManager over MSI
 
-As NamespaceManager is not supported anymore with the .NET Core compatible package ```Microsoft.Azure.ServiceBus``` (which is a dependency of ```Microsoft.Azure.WebJobs.Extensions.ServiceBus``` when using Service Bus within WebJobs or Functions)), the package ```Microsoft.Azure.Management.ServiceBus.Fluent``` and affiliates have to be used.
+As NamespaceManager is not supported anymore with the .NET Core compatible package `Microsoft.Azure.ServiceBus` (which is a dependency of `Microsoft.Azure.WebJobs.Extensions.ServiceBus` when using Service Bus within WebJobs or Functions)), the package `Microsoft.Azure.Management.ServiceBus.Fluent` and affiliates have to be used.
 
 This package supports a MSI based authentication and I can leverage the availability of [MSI - which I described here for v2 WebHosts](./part2.md):
 
