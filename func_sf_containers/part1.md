@@ -43,11 +43,23 @@ Finally with this approach Functions hosted in this pattern could exist as first
 
 ----
 
+## Scalability
+
+Before I go into single elements of the approach, a word on scalability - which seems to be an obvious issue; thanks [Paco](https://twitter.com/pacodelacruz) for pointing it out. 
+
+When we started with our platform we assumed, that it needed to be scalable like hell. Thousands of messages per second coming in from all directions which need to be passed on immediately at the same pace. In the aftermath: not so much. Some producers may generate loads of messages (e.g. on a mass data change in a business system) but most of the consumers - including our database, Cosmos DB - need a balanced way of getting these messages delivered. Hence the platform is acting more like a sandwich - allowing fast unloading from the producers and throttled forwarding applied towards the consumers.
+
+Based on our initial assumption we started fronting our unloading points with API Management which passed on the requests to Azure Functions in Consumption Plan. That setup fulfilled the scalability requirements pretty good - increasing incoming traffic made the Functions scale up, decreasing traffic back down again. What we did not consider - and back then just didn't know - were the limitations of the Function Consumption Plan sandbox environments. The HTTP triggered Functions picked up the incoming traffic and distributed it to several target message queues, database and/or target consumers HTTP endpoints. The high message load combined with too much processing or forwarding steps resulted in massive port exhaustion situations. To circumvent this we decided to let API Management take the initial load which puts message meta data directly into Service Bus queues and message payload into Blob storage. With that let Functions work on this message traffic at a controlled pace.
+
+Hence no further need for Consumption Plan and flexible scaling of the Function App instances anymore. Today we exercise semi-automated scaling of the containers depending on the backlog we have in certain Service Bus queues.
+
+----
+
 ### key elements and gotchas
 
 #### building the Function host
 
-When I started it was possible to download the pre-built Functions host directly with the ```Dockerfile```:
+When I started it was possible to download the pre-built Functions host directly with the `Dockerfile`:
 
 ```
 ...
@@ -69,7 +81,7 @@ RUN Expand-Archive C:\WebHost.zip ; Remove-Item WebHost.zip
 
 #### managing master key / secrets
 
-To control the master key the Function host uses on startup - instead of generating random keys - we prepared our own ```host_secrets.json``` file
+To control the master key the Function host uses on startup - instead of generating random keys - we prepared our own `host_secrets.json` file
 
 ```
 {
@@ -88,7 +100,7 @@ To control the master key the Function host uses on startup - instead of generat
 }
 ```
 
-and then feeded this file into the designated secrets folder of the Function host (```Dockerfile```):
+and then feeded this file into the designated secrets folder of the Function host (`Dockerfile`):
 
 ```
 ...
@@ -98,7 +110,7 @@ ADD host_secrets.json C:\\WebHost\\SiteExtensions\\Functions\\App_Data\\Secrets\
 
 #### auto starting web site
 
-```Dockerfile``` included this configuration to get the default web site autostarted and pointing to the Functions WebHost.
+`Dockerfile` included this configuration to get the default web site autostarted and pointing to the Functions WebHost.
 
 ```PowerShell
 ...
@@ -111,7 +123,7 @@ RUN Import-Module WebAdministration; \
 
 #### Always On / Keep Alive
 
-I tested this setup also with background Service Bus queue processing. Though I set the autostart properties for the Web Site, the background processing only started when the WebHost was initiated by a HTTP trigger. For that reason I have at least one HTTP triggered function (in the sample below ```GetServiceInfo```) which I query in the HTTP health probe of Service Fabrics load balancer. That keeps the WebHost up and running for background processing.
+I tested this setup also with background Service Bus queue processing. Though I set the autostart properties for the Web Site, the background processing only started when the WebHost was initiated by a HTTP trigger. For that reason I have at least one HTTP triggered function (in the sample below `GetServiceInfo`) which I query in the HTTP health probe of Service Fabrics load balancer. That keeps the WebHost up and running for background processing.
 
 from the Service Fabric ARM template:
 
@@ -155,7 +167,7 @@ from the Service Fabric ARM template:
 
 #### loading own set of certificates
 
-```Dockerfile``` can be used to load certificates into the container, to be used by the Function App:
+`Dockerfile` can be used to load certificates into the container, to be used by the Function App:
 
 ```PowerShell
 ...
@@ -171,7 +183,7 @@ RUN Set-Location -Path cert:\LocalMachine\Root;\
 
 #### extending the startup
 
-To add more processing to the app containers startup (which we will need later) the ```ENTRYPOINT``` passed down from the ```microsoft/aspnet:4.7.x``` image
+To add more processing to the app containers startup (which we will need later) the `ENTRYPOINT` passed down from the `microsoft/aspnet:4.7.x` image
 
 ```
 ...
@@ -200,7 +212,7 @@ C:\ServiceMonitor.exe w3svc
 
 #### wrapping it up
 
-This is what a base image ```Dockerfile``` looked like
+This is what a base image `Dockerfile` looked like
 
 ```
 FROM microsoft/aspnet:4.7.1
@@ -231,7 +243,7 @@ RUN Import-Module WebAdministration;                                            
 EXPOSE 80
 ```
 
-which can be referenced by App specific ```Dockerfile``` like:
+which can be referenced by App specific `Dockerfile` like:
 
 ```
 FROM mycompanycr.azurecr.io/functions.webhost:1.0.11612
@@ -256,7 +268,7 @@ Functions operated in App Service allow managed service identity to access secre
 
 To achieve the same in our environment we first had to [add managed service identity to Service Fabrics / VM scalesets](https://stackoverflow.com/questions/52578135/how-can-i-add-managed-service-identity-to-a-container-hosted-inside-azure-vm-sca/52578136#52578136).
 
-Now ```entry.PS1``` startup script introduced above can be used to add the route to the MSI endpoint and check it on container startup:
+Now `entry.PS1` startup script introduced above can be used to add the route to the MSI endpoint and check it on container startup:
 
 ```PowerShell
 Write-Host "adding route for Managed Service Identity"

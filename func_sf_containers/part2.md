@@ -11,7 +11,7 @@ For v2 there was more support for containerizing Azure Functions. There are alre
 But:
 
 - Nanoserver smalldisk images cannot are ... too small
-- no PowerShell in the Nanoserver ```microsoft/dotnet:2.1-aspnetcore-runtime-nanoserver-1803``` base image - which I needed for a the tweaks I implemented in v1
+- no PowerShell in the Nanoserver `microsoft/dotnet:2.1-aspnetcore-runtime-nanoserver-1803` base image - which I needed for a the tweaks I implemented in v1
 - PowerShell Core did not have the Certificate cmdlets yet. So how can I load my corporate certificates into the image?
 
 ## solving the basic problems
@@ -25,7 +25,7 @@ The solution to this problem is described on Stack Overflow:
 
 ### adding PowerShell Core
 
-Take the sample ```Dockerfile``` mentioned above and implement a multi-stage build which then allows running the ```entry.PS1``` script in PowerShell Core:
+Take the sample `Dockerfile` mentioned above and implement a multi-stage build which then allows running the `entry.PS1` script in PowerShell Core:
 
 ```
 # escape=`
@@ -73,13 +73,13 @@ Significant changes from Windows Server Core 1803 and Nanoserver 1803 base image
 
 ### handling secrets
 
-As the ```Dockerfile``` sample above suggests, also directory ACL needed modification so that the host running in user context is able to write into the secrets folder.
+As the `Dockerfile` sample above suggests, also directory ACL needed modification so that the host running in user context is able to write into the secrets folder.
 
 [check out Stack Overflow: System.UnauthorizedAccessException : Access to the path 'C:\runtime\Secrets\host.json' is denied in Azure Functions Windows container](https://stackoverflow.com/questions/53683035/system-unauthorizedaccessexception-access-to-the-path-c-runtime-secrets-host)
 
 ### MSI
 
-Also the MSI part needed some tweaking after switching to Nanoserver and PowerShell Core. Until ```Get-NetRoute``` cmdlet is not available in PowerShell Core, this strange string pipelining exercise is required to extract the default gateway.
+Also the MSI part needed some tweaking after switching to Nanoserver and PowerShell Core. Until `Get-NetRoute` cmdlet is not available in PowerShell Core, this strange string pipelining exercise is required to extract the default gateway.
 
 ```PowerShell
 Write-Host "adding route for Managed Service Identity"
@@ -103,7 +103,7 @@ dotnet.exe C:\runtime\Microsoft.Azure.WebJobs.Script.WebHost.dll
 
 ### @Microsoft.KeyVault(SecretUri=...) application settings
 
-[Azure Functions in App Service support the ```@Microsoft.KeyVault()``` syntax in application settings.](https://azure.microsoft.com/sv-se/blog/simplifying-security-for-serverless-and-web-apps-with-azure-functions-and-app-service/)  To achieve the same with environment variables inside containers this script extension does the transformation:
+[Azure Functions in App Service support the `@Microsoft.KeyVault()` syntax in application settings.](https://azure.microsoft.com/sv-se/blog/simplifying-security-for-serverless-and-web-apps-with-azure-functions-and-app-service/)  To achieve the same with environment variables inside containers this script extension does the transformation:
 
 ```PowerShell
 ...

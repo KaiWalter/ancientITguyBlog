@@ -1,17 +1,28 @@
 # Ancient IT guy blog
 
 <img style="float: right; margin-left:20px;" height="100" width="100" src="https://avatars2.githubusercontent.com/u/7418323?s=460&v=4">
-<img style="float: left; margin-right:20px;" height="100" width="100" src="https://media.licdn.com/dms/image/C4D03AQHRVWgkQ5zSWQ/profile-displayphoto-shrink_100_100/0?e=1556150400&v=beta&t=D4_Mm1-Q_nZdr7wN60dTi4mseAu3Qv3mVGMPKgVM_yA">
+<img style="float: left; margin-right:20px;" height="100" width="100" src="https://media.licdn.com/dms/image/C4D03AQHRVWgkQ5zSWQ/profile-displayphoto-shrink_200_200/0?e=1562198400&v=beta&t=HpV38xo4C9slGrE86nQsPvoc7NZ2woPIp16Z_X68X-Y">
 
 On my day job I am a Solution Architect in an Enterprise IT environment. That job keeps me away from the console most of the time. Occasionally I need to give in to my urge to actually figure out something technical. And here we are.
 
 ----
 
+<br/>
+
 ## Content
 
-- [Azure Functions inside Containers hosted in Service Fabric - Part 1 (WebHost v1)](./func_sf_containers/part1.md)
-- [Azure Functions inside Containers hosted in Service Fabric - Part 2 (WebHost v2)](./func_sf_containers/part2.md)
+### Azure Functions inside Containers hosted in Service Fabric
+
+- [Part 1 - hosting a v1 WebHost](./func_sf_containers/part1.md)
+- [Part 2 - hosting a v2 WebHost](./func_sf_containers/part2.md)
+- [Part 3 - supporting a singleton](./func_sf_containers/part3.md)
+- [Part 4 - connect to Service Bus Namespace Manager with MSI](./func_sf_containers/part4.md)
+
+### API Management and Service Fabric
+
 - [using API Management as Service Fabric container / service locator](./func_sf_containers/apim_sf_servicelocator.md)
+
+----
 
 ## Disclaimer
 
