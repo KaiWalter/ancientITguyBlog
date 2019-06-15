@@ -1,4 +1,4 @@
-# Motivation (spring 2019)
+# Ancient IT guy blog
 
 <img style="float: right; margin-left:20px;" height="100" width="100" src="https://avatars2.githubusercontent.com/u/7418323?s=460&v=4">
 <img style="float: left; margin-right:20px;" height="100" width="100" src="https://media.licdn.com/dms/image/C4D03AQHRVWgkQ5zSWQ/profile-displayphoto-shrink_100_100/0?e=1556150400&v=beta&t=D4_Mm1-Q_nZdr7wN60dTi4mseAu3Qv3mVGMPKgVM_yA">
