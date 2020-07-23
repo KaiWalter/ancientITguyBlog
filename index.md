@@ -1,1 +1,1 @@
-301 moved permanently to https://github.com/kaiwalter
+301 links to posts moved permanently to [my GitHub profile](https://github.com/kaiwalter)
